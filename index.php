@@ -80,6 +80,7 @@
 <body>
 <h1>Simplicity: To-Do List</h1>
  
+ <?php include("classes.php"); ?>
 <?php 
 $datbasename = "todo_db";
 $servername = "localhost";
@@ -131,7 +132,10 @@ if($result->num_rows > 0)
 		}
 }
 	$total_count = $pending_count + $late_count + $completed_count + $started_count;
-
+	
+	
+	
+	echo "Today's date: ".date("m/d/ Y") . "<br>";
 	//echo $total_count. 'Tasks'.'</h2
 	echo '<h2>'.$total_count." TASKS".'</h2>';
   echo '<p>
@@ -174,6 +178,7 @@ if($result->num_rows > 0)
 
 	
 	<?php
+	
 	while($column = $result->fetch_assoc())
 		{
 	

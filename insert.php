@@ -29,6 +29,14 @@ $taskname = $_POST['fname'];
 $status = $_POST['dropstatus'];
 $duedate = $_POST['fduedate'];
 
+$today = date("y-m-d");
+//if the date the user enters has already pasted,
+//change the status of that task to late
+if($due_date<$today)
+{
+	$status = "late";
+}
+
 //insert the items from our web form into our tasklist table
 $sql="INSERT INTO tasklist(name, status, due_date) VALUES('$taskname','$status', '$duedate')";
 

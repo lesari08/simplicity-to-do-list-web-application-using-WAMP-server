@@ -134,10 +134,9 @@ if($result->num_rows > 0)
 			++$counter;
 		}
 		echo '<input type="hidden" name="count" value=" '.$counter. '" />';
-		echo '<input type="submit" name="num'.$counter.' " value="sum'.$counter.' " />';
+		echo '<input type="submit" name="num'.$counter.' " value="submit" />';
 		echo '</form>';
-		//echo '</table></p>';
-		echo $counter;
+
 }
 else
 {
