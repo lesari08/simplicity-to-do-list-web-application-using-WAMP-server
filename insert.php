@@ -32,7 +32,8 @@ $duedate = $_POST['fduedate'];
 $today = date("y-m-d");
 //if the date the user enters has already pasted,
 //change the status of that task to late
-if($due_date<$today)
+echo "due due: $due_date and today: $today";
+if(new DateTime() > new DateTime($duedate))
 {
 	$status = "late";
 }
