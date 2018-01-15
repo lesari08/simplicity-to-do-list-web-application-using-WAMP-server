@@ -1,0 +1,4 @@
+
+To deploy project:
+Download the launchToDoList.bat file.
+Once the file has downloaded, double click the icon. The icon will immediately launch the web page from your computer’s default web browser.
