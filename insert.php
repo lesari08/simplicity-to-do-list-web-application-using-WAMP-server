@@ -3,26 +3,14 @@
 <title> Tasks </title>
 </head>
 <body style="background-color:aliceblue;">
+
+ <?php
+  require_once('dbconnection.php');
+  include("classes.php"); ?>
+  
 <?php
 
-$datbasename = "todo_db";
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db_name = "todo_db";
-
-//create a connection to your DBMS 
-//with the servername, username and password
-$connection = new mysqli($servername, $username, $password, $db_name);
-
-//check connection to make sure it completed successfully 
-if($connection->connect_error) 
-{
-	//die() prints the message then exits the current script
-	//no value is returned
-	die("Connection failed: " . $connection->connect_error);
-	
-}
+$connection = Db_connect::getInstance();
 
 //save the values from the form into these variable names
 $taskname = $_POST['fname'];
@@ -30,10 +18,16 @@ $status = $_POST['dropstatus'];
 $duedate = $_POST['fduedate'];
 
 $today = date("y-m-d");
+//if the date variable is not set
+if($duedate == "")
+{
+	$duedate= $today;
+}
+
 //if the date the user enters has already pasted,
 //change the status of that task to late
-echo "due due: $due_date and today: $today";
-if(new DateTime() > new DateTime($duedate))
+echo "date due: $duedate and today: $today";
+if(new DateTime($today) > new DateTime($duedate))
 {
 	$status = "late";
 }
@@ -51,27 +45,6 @@ if(!($connection->query($sql)))
 
 }
 
-$sql = "SELECT * FROM tasklist";
-$result = $connection->query($sql) or die(mysql_error());
-$column = mysqli_fetch_array($result) or die(mysql_error());
-
-//the function num_rows() checks to see if a result of a query returns more
-//than zero rows
-if($result->num_rows > 0)
-{
-	//the fetch_assoc() function organizes the results in an associative array
-	//Once the results are in an array we can use a loop to reach each item
-	while($column = $result->fetch_assoc())
-		{
-			?> <input type="checkbox"> <?php
-
-			echo $column["taskno"]." - ".$column["name"]." - ". $column["status"]. " - ".$column["due_date"]."<br>";
-		}
-}
-else
-{
-	echo "No rows found";
-}
 	
 
 mysqli_close($connection);

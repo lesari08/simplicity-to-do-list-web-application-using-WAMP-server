@@ -4,26 +4,13 @@
 <title> Tasks </title>
 </head>
 <body style="background-color:aliceblue;">
+
+ <?php
+  require_once('dbconnection.php');
+  include("classes.php"); ?>
 <?php
 
-$datbasename = "todo_db";
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db_name = "todo_db";
-
-//create a connection to your DBMS 
-//with the servername, username and password
-$connection = new mysqli($servername, $username, $password, $db_name);
-
-//check connection to make sure it completed successfully 
-if($connection->connect_error) 
-{
-	//die() prints the message then exits the current script
-	//no value is returned
-	die("Connection failed: " . $connection->connect_error);
-	
-}
+$connection = Db_connect::getInstance();
 
 
 $number_of_rows = $_POST['count'];
